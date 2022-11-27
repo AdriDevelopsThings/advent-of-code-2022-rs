@@ -3,7 +3,7 @@
 version = 3
 
 [[package]]
-name = "advent-of-code-2021-rs"
+name = "advent-of-code-2022-rs"
 version = "0.1.0"
 dependencies = [
  "clap",

@@ -4,10 +4,6 @@ use clap::Parser;
 
 mod loader;
 
-mod one;
-mod two;
-mod three;
-
 type AdventOfCodeSolveFunctions = &'static [(&'static str, fn(String) -> String, fn(String) -> String)];
 
 static ADVENTOFCODE_SOLVE_FUNCTIONS: AdventOfCodeSolveFunctions = &[];
