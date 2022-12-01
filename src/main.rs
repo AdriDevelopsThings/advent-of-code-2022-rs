@@ -1,4 +1,4 @@
-use std::time::Instant;
+use std::{time::Instant, path::PathBuf, fs::create_dir};
 
 use clap::Parser;
 
@@ -26,12 +26,17 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
+    let cache_path = PathBuf::from(".cache");
+    if !cache_path.exists() {
+        create_dir(cache_path.clone()).unwrap();
+    }
+
     let session = loader::Session{ session_token: args.session_token };
+    let cache = loader::Cache::new(cache_path, session);
     for function in ADVENTOFCODE_SOLVE_FUNCTIONS.iter() {
         if function.0 == args.puzzle {
             println!("Challenge {} ({}/2)", function.0, args.puzzle_part);
-            let input = session.get_puzzle_input(function.0)
-                .expect("Error while getting puzzle input for");
+            let input = cache.get_puzzle_input(function.0);
             let now = Instant::now();
             let output = match args.puzzle_part {
                 1 => function.1,
