@@ -4,9 +4,13 @@ use clap::Parser;
 
 mod loader;
 
+mod one;
+
 type AdventOfCodeSolveFunctions = &'static [(&'static str, fn(String) -> String, fn(String) -> String)];
 
-static ADVENTOFCODE_SOLVE_FUNCTIONS: AdventOfCodeSolveFunctions = &[];
+static ADVENTOFCODE_SOLVE_FUNCTIONS: AdventOfCodeSolveFunctions = &[
+    ("1", one::solve_first, one::solve_second)
+];
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]

@@ -9,6 +9,6 @@ impl Session {
             .get(format!("https://adventofcode.com/2022/day/{name}/input"))
             .header("cookie", format!("session={}", self.session_token)).send()?;
         res.error_for_status_ref().expect("Eror while request");
-        res.text()
+        Ok(String::from(res.text().unwrap().trim()))
     }
 }
