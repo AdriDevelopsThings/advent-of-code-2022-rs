@@ -41,7 +41,7 @@ impl From<&str> for Rucksack {
 }
 
 impl Rucksack {
-    fn get_comman_item(&self) -> Option<&Item> {
+    fn get_common_item(&self) -> Option<&Item> {
         for item in self.0.iter() {
             for item_2 in self.1.iter() {
                 if item == item_2 {
@@ -68,7 +68,7 @@ fn parse_rucksacks(input: String) -> Vec<Rucksack> {
 }
 
 pub fn solve_first(input: String) -> String {
-    parse_rucksacks(input).iter().map(|r| r.get_comman_item().unwrap().priority()).sum::<u32>().to_string()
+    parse_rucksacks(input).iter().map(|r| r.get_common_item().unwrap().priority()).sum::<u32>().to_string()
 }
 
 pub fn solve_second(input: String) -> String {
