@@ -7,13 +7,15 @@ mod loader;
 mod one;
 mod second;
 mod third;
+mod fourth;
 
 type AdventOfCodeSolveFunctions = &'static [(&'static str, fn(String) -> String, fn(String) -> String)];
 
 static ADVENTOFCODE_SOLVE_FUNCTIONS: AdventOfCodeSolveFunctions = &[
     ("1", one::solve_first, one::solve_second),
     ("2", second::solve_first, second::solve_second),
-    ("3", third::solve_first, third::solve_second)
+    ("3", third::solve_first, third::solve_second),
+    ("4", fourth::solve_first, fourth::solve_second)
 ];
 
 #[derive(Parser, Debug)]
