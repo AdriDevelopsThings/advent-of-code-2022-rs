@@ -18,14 +18,15 @@ impl Cache {
     }
 
     fn add(&self, key: &str, content: String) {
-        let mut file = File::create(self.path.join(key)).unwrap();
+        let mut file = File::create(self.path.join(String::from(key) + ".txt")).unwrap();
         file.write_all(content.as_bytes()).unwrap();
     }
 
     fn get(&self, key: &str) -> Option<String>{
-        let path = self.path.join(key);
+        let filename = String::from(key) + ".txt";
+        let path = self.path.join(filename.clone());
         if path.exists() {
-            Some(fs::read_to_string(self.path.join(key)).unwrap())
+            Some(fs::read_to_string(self.path.join(filename)).unwrap())
         } else {
             None
         }
@@ -53,6 +54,10 @@ impl Session {
             .header("user-agent", "adventofcode@adridoesthings.com")
             .send()?;
         res.error_for_status_ref().expect("Eror while request");
-        Ok(String::from(res.text().unwrap().trim()))
+        let mut s = res.text().unwrap();
+        if s.ends_with('\n') {
+            s.truncate(s.len() - 1);
+        }
+        Ok(s)
     }
 }
